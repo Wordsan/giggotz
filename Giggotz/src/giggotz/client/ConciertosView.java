@@ -86,6 +86,7 @@ public class ConciertosView extends Composite{
 					conciertos.remove(conciertos.size()-1);
 				 for(Gig g:conciertos){
 					 panel.add(getPanelConcierto(g));
+					 panel.setSpacing(10);
 				 }
 					
 				}	

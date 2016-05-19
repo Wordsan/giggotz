@@ -22,6 +22,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
@@ -33,22 +34,17 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
- //comentario.
-
- //holaaaa!
-
- //prueba2
-
 public class Giggotz implements EntryPoint {
 	private static boolean unionViewCreada=false;
 	private static Panel p=RootPanel.get();
+	private static HorizontalPanel horizontalP;
 	
 	public void onModuleLoad() {
 		 go("init",new HashMap<String,Object>());
 
 	}
 	public static void go(String token, Map<String,Object> params){
-		Panel p=RootPanel.get();
+	
 		
 		//Panel p2=RootLayoutPanel.get();
 		if(token.equals("init")){
@@ -57,11 +53,14 @@ public class Giggotz implements EntryPoint {
 		}
 		if(token.equals("busqueda")){
 			p.clear();
-			p.add(new ConciertosView(params));
+			horizontalP=new HorizontalPanel();
+			horizontalP.add(new ConciertosView(params));
+			p.add(horizontalP);
+		
 		}
 		if(token.equals("spotifyWikipedia")){
 			if(!unionViewCreada){
-			p.add(new UnionView(params));
+			horizontalP.add(new UnionView(params));
 			unionViewCreada=true;
 			}else{
 			UnionView.actualizaPanel(params);	

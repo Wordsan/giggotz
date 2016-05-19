@@ -148,11 +148,11 @@ public class LectorJson {
 				gigs.get(indiceLista).setTicketPrice(p);
 			}
 			if(cumuloDatos.endsWith("startDate\":")){
-				System.out.println("weee");
+				//System.out.println("weee");
 				gigs.get(indiceLista).setStartDate(recorreObjeto());
 			}
 			if(cumuloDatos.endsWith("\"modDate\":")){
-				System.out.println("modDate");
+				//System.out.println("modDate");
 				gigs.get(indiceLista).setModDate(recorreObjeto());
 			}
 			if(cumuloDatos.endsWith("\"images\":")){

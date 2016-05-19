@@ -2,6 +2,7 @@ package giggotz.client;
 
 import java.util.Map;
 
+import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -10,13 +11,14 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class UnionView extends Composite{
 
-	private static VerticalPanel panel=new VerticalPanel();
+	private static AbsolutePanel panel=new AbsolutePanel();
 	private static Integer u=0;
 
 	public UnionView(Map<String,Object> params){
 	
 		initWidget(panel);
-		panel.setStyleName("unioView");
+		//panel.setStyleName("unionView");
+
 		DecoratorPanel decPanel = new DecoratorPanel();
 		HorizontalPanel hPanelPrincipal=new HorizontalPanel();
 		//Image foto=new Image(concierto.getImages().getMedium());
@@ -36,7 +38,9 @@ public class UnionView extends Composite{
 	public static void actualizaPanel(Map<String,Object> params){
 		panel.clear();
 		DecoratorPanel decPanel = new DecoratorPanel();
+		decPanel.setStyleName("unionPanel");
 		HorizontalPanel hPanelPrincipal=new HorizontalPanel();
+		
 		//Image foto=new Image(concierto.getImages().getMedium());
 		//hPanelPrincipal.add(foto);
 		VerticalPanel texto=new VerticalPanel();

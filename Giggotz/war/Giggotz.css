@@ -30,11 +30,11 @@ h1 {
 .box {
         margin-left: auto;
         margin-right: auto;
-        margin-top:8%;
+        margin-top:9%;
        
     }
 .unionView {
-	 margin-left: auto;
+	 margin-left: 50%;
      margin-right:auto;
      margin-top:20%;
 }
