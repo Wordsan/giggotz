@@ -56,19 +56,37 @@ public class ConciertosView extends Composite{
 	}
 	
 	private void ponConciertos(Map<String,Object> params){
+		//Label error=new Label("No se ha encontrado resultados que coincidan con la busqueda");
+		
 		if(params.get("tipoBusqueda").equals("0")){
 			gigService.getRespuestaPorArtista((String) params.get("busqueda"), new AsyncCallback<Response>(){
 
 				
 				public void onFailure(Throwable cosa) {
-					 Window.alert("Error:"+cosa.getMessage());							
+					 Giggotz.p.clear();
+					Map<String,Object> params=new HashMap<String,Object>();
+					 params.put("failure","Error:"+cosa.getMessage());
+					 Giggotz.go("failure",params);
+				 
 				}
 
 				public void onSuccess(Response response) {
-					List<Gig> conciertos=response.getGigs();
-					conciertos.remove(conciertos.size()-1);
-				 for(Gig g:conciertos){
-					 panel.add(getPanelConcierto(g));
+				
+					if(response.getStatus().equals("error")){
+						Giggotz.p.clear();
+						Map<String,Object> params=new HashMap<String,Object>();
+					    params.put("busquedaFallida","No se han encontrado conciertos del artista buscado");
+						Giggotz.go("init",params);
+				
+					
+					}else{
+					  List<Gig> conciertos=response.getGigs();
+					 conciertos.remove(conciertos.size()-1);
+					 
+				     for(Gig g:conciertos){
+					  panel.add(getPanelConcierto(g));
+					  panel.setSpacing(10);
+				    }
 				 }
 					
 				}	
@@ -78,18 +96,30 @@ public class ConciertosView extends Composite{
 
 				
 				public void onFailure(Throwable cosa) {
-					 Window.alert("Error:"+cosa.getMessage());							
+					 Giggotz.p.clear();
+					 Map<String,Object> params=new HashMap<String,Object>();
+					 params.put("failure","Error: "+cosa.getMessage());
+					 Giggotz.go("failure",params);				
 				}
 
 				public void onSuccess(Response response) {
-					List<Gig> conciertos=response.getGigs();
-					conciertos.remove(conciertos.size()-1);
-				 for(Gig g:conciertos){
-					 panel.add(getPanelConcierto(g));
-					 panel.setSpacing(10);
-				 }
+					if(response.getStatus().equals("error")){
+						Giggotz.p.clear();
+						Map<String,Object> params=new HashMap<String,Object>();
+					    params.put("busquedaFallida","No se han encontrado conciertos en la ciudad buscada");
+						Giggotz.go("init",params);
 					
-				}	
+					
+					}else{
+						List<Gig> conciertos=response.getGigs();
+						conciertos.remove(conciertos.size()-1);
+						 
+						for(Gig g:conciertos){
+							 panel.add(getPanelConcierto(g));
+							 panel.setSpacing(10);
+				   }
+				  }	
+				 }	
 				});
 		}
 	}

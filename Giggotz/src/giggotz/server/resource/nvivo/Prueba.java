@@ -36,6 +36,7 @@ public class Prueba {
 			   System.out.println("Foto"+prueba.getImages().get(1).getMedium());
 			   System.out.println("Response"+prueba.getResponse().getIndiceLista());
 			   System.out.println("Response"+prueba.getResponse().getGigs().get(9).getName());
+			   System.out.println("Status: "+prueba.getResponse().getStatus());
 			   int i=0;
 			   List<Gig> res=prueba.getResponse().getGigs();
 			   res.remove(res.size()-1);

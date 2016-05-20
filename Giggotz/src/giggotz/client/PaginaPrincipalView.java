@@ -5,6 +5,7 @@ import java.util.Map;
 
 
 
+
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -55,7 +56,9 @@ public class PaginaPrincipalView extends Composite{
 	    panel.setSpacing(20);
 	    //Segundo panel horizonta.
 	    HorizontalPanel hPanel2=new HorizontalPanel();
-	    hPanel2.add(new Label("Buscar por: "));
+	    Label aBuscar=new Label("Buscar conciertos en España por: ");
+	    aBuscar.setStyleName("mainText");
+	    hPanel2.add(aBuscar);
 	    hPanel2.setSpacing(5);
 	   
 	    tipoBusqueda.addItem("Artista");
@@ -66,6 +69,20 @@ public class PaginaPrincipalView extends Composite{
 	   
 	   // hPanel.add(new Label((new Integer(tipoBusqueda.getSelectedIndex())).toString()));
 	    panel.add(hPanel2);
+	   
+	    //panel.add(hPanel2);
+	    if(params.containsKey("failure")){
+	    	Label fallo=new Label((String) params.get("failure"));
+	    	fallo.setStyleName("mainText");
+	    	panel.add(fallo);
+	    	panel.setCellHorizontalAlignment(fallo, HasHorizontalAlignment.ALIGN_CENTER);
+	    }
+	    if(params.containsKey("busquedaFallida")){
+	    	Label falloBusqueda=new Label((String) params.get("busquedaFallida"));
+	    	falloBusqueda.setStyleName("mainText");
+	    	panel.add(falloBusqueda);
+	    	panel.setCellHorizontalAlignment(falloBusqueda, HasHorizontalAlignment.ALIGN_CENTER);
+	    }
 	    panel.setCellHorizontalAlignment(hPanel, HasHorizontalAlignment.ALIGN_CENTER);
 	    panel.setCellHorizontalAlignment(hPanel2, HasHorizontalAlignment.ALIGN_CENTER);
 	    panel.setStyleName("box");

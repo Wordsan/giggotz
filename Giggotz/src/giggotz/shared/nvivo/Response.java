@@ -14,6 +14,7 @@ public class Response implements Serializable{
 	private static final long serialVersionUID = -5120752150592043208L;
 	private List<Gig> gigs = new ArrayList<Gig>();
 	private int indiceLista=0;
+	private String status;
 
     public Response(){
     	
@@ -34,5 +35,12 @@ public class Response implements Serializable{
 	public void setIndiceLista(int indiceLista) {
 		this.indiceLista = indiceLista;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 
 }
