@@ -26,6 +26,7 @@ public class LectorJson {
 	private List<Venue> venues=new ArrayList<Venue>();
 	private List<Images> images=new ArrayList<Images>();
 	private List<TicketPrice> prices=new ArrayList<TicketPrice>();
+	private String status;
 	//private Integer conciertos=0;
 	private int i=0;
 	private int llaveAbierta=0;
@@ -58,6 +59,7 @@ public class LectorJson {
 		Response r=new Response();
 		r.setGigs(gigs);
 		r.setIndiceLista(indiceLista-1);
+		r.setStatus(status);
 		return r;
 	}
 	public List<Gig> getGigs(){
@@ -115,6 +117,13 @@ public class LectorJson {
 			}
 			cumuloDatos=cumuloDatos+c;
 			//System.out.println(cumuloDatos);
+			if(cumuloDatos.endsWith("\"status\":")){
+				String s= recorreObjeto();
+			    status=s;
+		   
+		    
+		    
+			}
 			if(cumuloDatos.endsWith("\"name\":")){
 				String s= recorreObjeto();
 			//	System.out.println(s);

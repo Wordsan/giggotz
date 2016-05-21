@@ -36,7 +36,7 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class Giggotz implements EntryPoint {
 	private static boolean unionViewCreada=false;
-	private static Panel p=RootPanel.get();
+	public static Panel p=RootPanel.get();
 	private static HorizontalPanel horizontalP;
 	
 	public void onModuleLoad() {
@@ -65,6 +65,10 @@ public class Giggotz implements EntryPoint {
 			}else{
 			UnionView.actualizaPanel(params);	
 			}
+		}
+		if(token.equals("failure")){
+			p.clear();
+			p.add(new OnFailureView(params));
 		}
 	}  
    
