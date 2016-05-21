@@ -6,6 +6,7 @@ import giggotz.shared.nvivo.Artist;
 import giggotz.shared.nvivo.Gig;
 import giggotz.shared.nvivo.Response;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,9 +24,15 @@ import java.util.Map;
 
 
 
+
+
+
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -43,9 +50,12 @@ import com.google.gwt.user.client.ui.Widget;
 public class ConciertosView extends Composite{
     private final GigServiceAsync gigService=GWT.create(GigService.class);
 	private final VerticalPanel panel;
-	private final Label b=new Label("sfgsrgsrg");
+	private final List<DecoratorPanel> listaDecPanel=new ArrayList<DecoratorPanel>();
+	
+   
 	
 	public ConciertosView(Map<String,Object> params){
+		
 		panel=new VerticalPanel();
 		initWidget(panel);
 		panel.setSize("500px", "1000px");
@@ -84,7 +94,9 @@ public class ConciertosView extends Composite{
 					 conciertos.remove(conciertos.size()-1);
 					 
 				     for(Gig g:conciertos){
-					  panel.add(getPanelConcierto(g));
+				      DecoratorPanel dP=getPanelConcierto(g);	 
+					  panel.add(dP);
+					  listaDecPanel.add(dP);
 					  panel.setSpacing(10);
 				    }
 				 }
@@ -115,7 +127,9 @@ public class ConciertosView extends Composite{
 						conciertos.remove(conciertos.size()-1);
 						 
 						for(Gig g:conciertos){
-							 panel.add(getPanelConcierto(g));
+							 DecoratorPanel dP=getPanelConcierto(g);	
+							 panel.add(dP);
+							 listaDecPanel.add(dP);
 							 panel.setSpacing(10);
 				   }
 				  }	
@@ -125,7 +139,7 @@ public class ConciertosView extends Composite{
 	}
 	
 	private DecoratorPanel getPanelConcierto(final Gig concierto){
-		DecoratorPanel decPanel = new DecoratorPanel();
+		final DecoratorPanel decPanel = new DecoratorPanel();
 		HorizontalPanel hPanelPrincipal=new HorizontalPanel();
 		String imageUrl=concierto.getImages().getMedium();
 		Image foto;
@@ -181,9 +195,16 @@ public class ConciertosView extends Composite{
 
 			@Override
 			public void onClick(ClickEvent event) {
+				for(DecoratorPanel d:listaDecPanel){
+					d.getElement().getStyle().setBackgroundColor("#ffffff");
+				}
+				decPanel.getElement().getStyle().setBackgroundColor("#c9c9ff");
+			
 				Map<String,Object> params=new HashMap<String,Object>();
 				params.put("artista",listaArtistas.get(listBoxArtistas.getSelectedIndex()).getName());
 				Giggotz.go("spotifyWikipedia",params);
+				
+				
 			}
 			
 		},ClickEvent.getType() );
